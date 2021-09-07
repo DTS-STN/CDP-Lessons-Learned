@@ -1,4 +1,4 @@
-# Performance Dashboard Lessons Learned
+# Performance Dashboard
 
 status of design doc:
 

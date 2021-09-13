@@ -33,7 +33,7 @@ Azure Synapse is an analytics service that brings together enterprise data wareh
 
 The current state architecture with Azure Synapse is as follows:
 
-![Data Flow using Azure Synapse]()
+![Data Flow using Azure Synapse](https://github.com/DTS-STN/CDP-Lessons-Learned/blob/main/Data_Flow_1.png)
 
 This required to set up a linked service for Azure Data Lake Gen2 storage account. The Azure Synapse pipeline runs the notebook running on Apache Spark Pool that reads the dummy data available in the storage account, transform data to add a new column, and writes the transformed data back to the same storage account in the form of a csv. Lastly the data is visualized in Power BI desktop upon building connection with output file location in storage account with the use of Azure Data Lake Storage Gen2 connector.
 
@@ -45,7 +45,7 @@ Azure Databricks is an analytics platform based on Apache Spark. It offers noteb
 
 The current state architecture utilizing Data Factory and Databricks is as follows:
 
-![Data Flow using ADF and Databricks]()
+![Data Flow using ADF and Databricks](https://github.com/DTS-STN/CDP-Lessons-Learned/blob/main/Data_Flow_2.png)
 
 Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop and as you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. However, due to connection issues Data Lake Gen2 was chosen as the data source for Power BI. Azure Data Lake Storage Gen2 connector does not support Direct Query hence, the data needs to be refreshed manually to see underlying data changes since the initial import.
 
@@ -96,9 +96,3 @@ Apache Spark Pool allows to analyze and process large volumes of data using Spar
 ## Next Steps
 
 The next steps are to run this pipeline on meaningful data (most likely an excel file from SharePoint Online) rather than dummy data and build direct connection with existing Power BI report server requiring minimal human intervention. The goal will be to build a repeatable pipeline so that one runs the pipeline and as an end result the data is automatically refreshed in Power BI report server.
-
-
-
-
-
-

@@ -4,7 +4,7 @@ Authors: Arpit Dhindsa
 
 ## Overview
 
-The Service Analytics Evidence Base (SAEB) is the cloud data and analytics platform that is currently in exploratory phase. 
+The Service Analytics Evidence Base (SAEB) architecture is scoped to the cloud data and analytics platform that will enable analytics and evidenced based improvements to the digital channel.
 
 This "Lessons Learned" document is meant to be a repository of institutional memory for hard-won insights and understanding around the tools and technologies used to develop the SAEB architecture.                              
 

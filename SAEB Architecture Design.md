@@ -16,6 +16,8 @@ The exercise aimed to use OAS dataset however, due to delayed access to the On-P
 
 ## Goals
 
+The goal was to ingest and transform data using the pipelines. To do this following activities were performed:
+
 - Create data pipeline using Azure Data Factory and Azure Databricks
 - Create data pipeline using Azure Synapse
 - Visualize data with Power BI

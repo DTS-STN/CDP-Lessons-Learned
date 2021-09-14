@@ -49,12 +49,15 @@ The current state architecture utilizing Data Factory and Databricks is as follo
 
 ![Data Flow using ADF and Databricks](Data_Flow_2.png)
 
-Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop and as you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. However, due to connection issues Data Lake Gen2 was chosen as the data source for Power BI. Azure Data Lake Storage Gen2 connector does not support Direct Query hence, the data needs to be refreshed manually to see underlying data changes since the initial import.
+Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. 
+
+Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop. As you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. Tiles based on DirectQuery datasets refresh automatically according to a schedule by sending queries to the back-end data source. By default, datasets refresh every hour, but they can be configured as part of dataset settings to be between weekly and every 15 minutes. However, due to connection issues _(see Issue #1 in Unresolved Issues under Problem/Blockers)_, Data Lake Gen2 was chosen as the data source for Power BI. Azure Data Lake Storage Gen2 connector does not support Direct Query hence, the data needs to be refreshed manually to see underlying data changes since the initial import.
 
 ## Problems/Blockers
 
 Multiple issues were faced when building these pipelines. Some of these have been resolved while others still exist. 
 
+### Solved Issues
 Issues solved to date include:
 1. Unable to build Pipelines, Notebooks and set up linked service on Azure Synapse
    - _Solution:_ Grant users with Synapse Contributor rights to develop, debug, and publish code to the service
@@ -67,6 +70,7 @@ Issues solved to date include:
 3. Unable to create Spark database in Azure Synapse
    - _Solution:_ Add user and synapse workspace to ACLs in Data Lake storage and give Read, Write and Execute permissions on container as the database tables are stored under a synapse directory that automatically gets created under the container once database is created in synapse workspace.
 
+### Unresolved Issues
 Issues pending to be solved:
 1. Cannot connect Databricks database to Power BI Desktop
    - _Databricks connector error:_ "ODBC: ERROR [HY000] [Microsoft][DriverSupport] (2019) Invalid user agent entry."

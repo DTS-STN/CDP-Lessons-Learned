@@ -60,7 +60,7 @@ Issues solved to date include:
    -	_Solution:_ 
           - Grant Azure Synapse Reader and Data Access role on Data Lake Storage Account as this will only allow read/write access to the data contained in a storage account.
           - Grant users Reader and Data Access role to access the data within the storage account because the script runs under the users that execute the notebook. Solely giving users Contributor rights on storage account, does not give them access to the data in the lake but only allows them to manage the resource so, a data access role needs to be assigned to the user to access data within the storage account.
-          - Add user and synapse workspace to ACLs in Data Lake storage and give Read, Write and Execute permissions on directory to which the user needs to write the data to. Where Azure RBAC provides a “coarse-grain” level of access such as read or write access to all of the data in a storage account or container, ACLs give the ability to apply “finer grain” level of access to directories and files.
+          - Add user and synapse workspace to Access Control Lists (ACLs) in Data Lake storage and give Read, Write and Execute permissions on directory to which the user needs to write the data to. Where Azure RBAC provides a “coarse-grain” level of access such as read or write access to all of the data in a storage account or container, ACLs give the ability to apply “finer grain” level of access to directories and files.
       Similarly Azure Data Factory was granted Read and Data Access role on Azure Data Lake Gen2 storage account and users are added to built-in Data Factory Contributor role on the Resource Group that contains the Data Factory resource.
 3. Unable to create Spark database in Azure Synapse
    - _Solution:_ Add user and synapse workspace to ACLs in Data Lake storage and give Read, Write and Execute permissions on container as the database tables are stored under a synapse directory that automatically gets created under the container once database is created in synapse workspace.
@@ -79,7 +79,7 @@ Issues pending to be solved:
 
 ### Azure Data Factory vs Synapse Pipelines
 
-Azure Synapse Analytics offers codeless data integration capabilities like Azure Data Factory. Both offer the ability to build a data integration pipeline using graphical user interface without writing a single line of code. Most activities from ADF can be found in Synapse. Synapse has Spark notebooks and SQL pools which are not available in ADF and these activities do not require setting up linked services. Synapse allows creation of linked services like ADF to connect to various tools but, does not support SSIS package activity and Power Query activity.
+Azure Synapse Analytics offers codeless data integration capabilities like Azure Data Factory. Both offer the ability to build a data integration pipeline using graphical user interface without writing a single line of code. Most activities from ADF can be found in Synapse. Synapse has Spark notebooks and SQL pools which are not available in ADF and these activities do not require setting up linked services. Synapse allows creation of linked services like ADF to connect to various tools but, does not support SQL Server Integration Services (SSIS) package activity and Power Query activity.
 
 ### Azure Databricks vs Synapse Spark Notebook
 

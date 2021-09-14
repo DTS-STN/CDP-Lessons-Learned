@@ -12,7 +12,7 @@ This "Lessons Learned" document is meant to be a repository of institutional mem
 
 The initial development phase involved building an end-to-end data pipeline that ingests data into SAEB cloud, performs a transformation and pushes the transformed data to power BI dashboard for data visualization. 
 
-The exercise aimed to use OAS dataset however, due to delayed access to the On-Prem Oracle Data Lake (Sandbox), an unclassified data was used that was already present in the blob storage. To do this we explored two options: one using Data Factory and Databricks and another using Azure Synapse.
+The exercise made use of an unclassified dataset that was already present in the blob storage. To do this we explored two options: one using Data Factory and Databricks and another using Azure Synapse.
 
 ## Goals
 

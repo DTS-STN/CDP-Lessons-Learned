@@ -51,7 +51,9 @@ The current state architecture utilizing Data Factory and Databricks is as follo
 
 Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. 
 
-Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop. As you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. Tiles based on DirectQuery datasets refresh automatically according to a schedule by sending queries to the back-end data source. By default, datasets refresh every hour, but they can be configured as part of dataset settings to be between weekly and every 15 minutes. However, due to connection issues _(see Issue #1 in Unresolved Issues under Problem/Blockers)_, Data Lake Gen2 was chosen as the data source for Power BI. Azure Data Lake Storage Gen2 connector does not support Direct Query hence, the data needs to be refreshed manually to see underlying data changes since the initial import.
+Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop. As you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. Tiles based on DirectQuery datasets refresh automatically according to a schedule by sending queries to the back-end data source. By default, datasets refresh every hour, but they can be configured as part of dataset settings to be between weekly and every 15 minutes. 
+
+However, due to connection issues _(see Issue #1 in Unresolved Issues under Problem/Blockers)_, Data Lake Gen2 was chosen as the data source for Power BI. Azure Data Lake Storage Gen2 connector does not support Direct Query hence, the data needs to be refreshed manually to see underlying data changes since the initial import.
 
 ## Problems/Blockers
 
@@ -63,12 +65,13 @@ Issues solved to date include:
    - _Solution:_ Grant users with Synapse Contributor rights to develop, debug, and publish code to the service
 2. Unable to write to Azure Data Lake from Azure Synapse Notebook
    - _Solution:_ 
-          - Grant Azure Synapse Reader and Data Access role on Data Lake Storage Account as this will only allow read/write access to the data contained in a storage account.
-          - Grant users Reader and Data Access role to access the data within the storage account because the script runs under the users that execute the notebook. Solely giving users Contributor rights on storage account, does not give them access to the data in the lake but only allows them to manage the resource so, a data access role needs to be assigned to the user to access data within the storage account.
-          - Add user and synapse workspace to Access Control Lists (ACLs) in Data Lake storage and give Read, Write and Execute permissions on directory to which the user needs to write the data to. Where Azure RBAC provides a “coarse-grain” level of access such as read or write access to all of the data in a storage account or container, ACLs give the ability to apply “finer grain” level of access to directories and files.
-      Similarly Azure Data Factory was granted Read and Data Access role on Azure Data Lake Gen2 storage account and users are added to built-in Data Factory Contributor role on the Resource Group that contains the Data Factory resource.
+          - Grant `Azure Synapse` `Reader and Data Access` role on `Data Lake Storage Account` as this will only allow read/write access to the data contained in a storage account.
+          - Grant users `Reader and Data Access` role to access the data within the storage account because the script runs under the users that execute the notebook. Solely giving users `Contributor` rights on storage account, does not give them access to the data in the lake but only allows them to manage the resource so, a data access role needs to be assigned to the user to access data within the storage account.
+          - Add `user` and `synapse workspace` to `Access Control Lists (ACLs)` in `Data Lake storage` and give `Read, Write and Execute` permissions on directory to which the user needs to write the data to. Where Azure Role Based Access Control (RBAC) provides a “coarse-grain” level of access such as read or write access to all of the data in a storage account or container, ACLs give the ability to apply “finer grain” level of access to directories and files.
+      
+      Similarly `Azure Data Factory` was granted `Read and Data Access` role on `Azure Data Lake Gen2` storage account and `users` are added to built-in `Data Factory Contributor` role on the `Resource Group` that contains the Data Factory resource.
 3. Unable to create Spark database in Azure Synapse
-   - _Solution:_ Add user and synapse workspace to ACLs in Data Lake storage and give Read, Write and Execute permissions on container as the database tables are stored under a synapse directory that automatically gets created under the container once database is created in synapse workspace.
+   - _Solution:_ Add `user` and `synapse workspace` to `ACLs` in `Data Lake storage` and give `Read, Write and Execute` permissions on `container` as the database tables are stored under a synapse directory that automatically gets created under the container once database is created in synapse workspace.
 
 ### Unresolved Issues
 Issues pending to be solved:
@@ -79,7 +82,7 @@ Issues pending to be solved:
    - _Azure Synapse Analytics (SQL DW) connector error:_ "Microsoft SQL: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)"
 3. Unable to write data to Synapse Dedicated SQL Pool
    - _Error:_ Login failed for user '<token-identified principal>'
-   - _Possible Solution:_ Currently, the Access control within Synapse Studio does not apply to dedicated SQL pools. Workspace admin can create a user manually through T-SQL or they can add a user through SQL Active Directory Admin option when they navigate to workspace resource in Azure Portal.
+   - _Possible Solution:_ Currently, the Access control within Synapse Studio does not apply to dedicated SQL pools. Workspace administrator can create a user manually through T-SQL or they can `add a user` through `SQL Active Directory Admin` option when they navigate to workspace resource in `Azure Portal`.
 
 ## Tech Comparisons
 

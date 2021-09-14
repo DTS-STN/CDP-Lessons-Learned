@@ -17,7 +17,7 @@ The exercise aimed to use OAS dataset however, due to delayed access to the On-P
 ## Goals
 
 - Create data pipeline using Azure Data Factory and Azure Databricks
--	Create data pipeline using Azure Synapse
+- Create data pipeline using Azure Synapse
 - Visualize data with Power BI
 
 ## End-to-end Data Pipeline 
@@ -33,7 +33,7 @@ Azure Synapse is an analytics service that brings together enterprise data wareh
 
 The current state architecture with Azure Synapse is as follows:
 
-![Data Flow using Azure Synapse](https://github.com/DTS-STN/CDP-Lessons-Learned/blob/main/Data_Flow_1.png)
+![Data Flow using Azure Synapse](Data_Flow_1.png)
 
 This required to set up a linked service for Azure Data Lake Gen2 storage account. The Azure Synapse pipeline runs the notebook running on Apache Spark Pool that reads the dummy data available in the storage account, transform data to add a new column, and writes the transformed data back to the same storage account in the form of a csv. Lastly the data is visualized in Power BI desktop upon building connection with output file location in storage account with the use of Azure Data Lake Storage Gen2 connector.
 
@@ -45,7 +45,7 @@ Azure Databricks is an analytics platform based on Apache Spark. It offers noteb
 
 The current state architecture utilizing Data Factory and Databricks is as follows:
 
-![Data Flow using ADF and Databricks](https://github.com/DTS-STN/CDP-Lessons-Learned/blob/main/Data_Flow_2.png)
+![Data Flow using ADF and Databricks](Data_Flow_2.png)
 
 Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop and as you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. However, due to connection issues Data Lake Gen2 was chosen as the data source for Power BI. Azure Data Lake Storage Gen2 connector does not support Direct Query hence, the data needs to be refreshed manually to see underlying data changes since the initial import.
 
@@ -57,7 +57,7 @@ Issues solved to date include:
 1. Unable to build Pipelines, Notebooks and set up linked service on Azure Synapse
    - _Solution:_ Grant users with Synapse Contributor rights to develop, debug, and publish code to the service
 2. Unable to write to Azure Data Lake from Azure Synapse Notebook
-   -	_Solution:_ 
+   - _Solution:_ 
           - Grant Azure Synapse Reader and Data Access role on Data Lake Storage Account as this will only allow read/write access to the data contained in a storage account.
           - Grant users Reader and Data Access role to access the data within the storage account because the script runs under the users that execute the notebook. Solely giving users Contributor rights on storage account, does not give them access to the data in the lake but only allows them to manage the resource so, a data access role needs to be assigned to the user to access data within the storage account.
           - Add user and synapse workspace to Access Control Lists (ACLs) in Data Lake storage and give Read, Write and Execute permissions on directory to which the user needs to write the data to. Where Azure RBAC provides a “coarse-grain” level of access such as read or write access to all of the data in a storage account or container, ACLs give the ability to apply “finer grain” level of access to directories and files.

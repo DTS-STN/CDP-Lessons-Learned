@@ -47,7 +47,7 @@ Azure Databricks is an analytics platform based on Apache Spark. It offers noteb
 
 The current state architecture utilizing Data Factory and Databricks is as follows:
 
-![Data Flow using ADF and Databricks](Data_Flow_2.png)
+![Data Flow using ADF and Databricks](DataFlow_2.png)
 
 Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. 
 

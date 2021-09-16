@@ -88,11 +88,34 @@ Issues pending to be solved:
 
 ### Azure Data Factory vs Synapse Pipelines
 
-Azure Synapse Analytics offers codeless data integration capabilities like Azure Data Factory. Both offer the ability to build a data integration pipeline using graphical user interface without writing a single line of code. Most activities from ADF can be found in Synapse. Synapse has Spark notebooks and SQL pools which are not available in ADF and these activities do not require setting up linked services. Synapse allows creation of linked services like ADF to connect to various tools but, does not support SQL Server Integration Services (SSIS) package activity and Power Query activity.
+Azure Synapse Analytics offers codeless data integration capabilities like Azure Data Factory. Both offer the ability to build a data integration pipeline using graphical user interface without writing a single line of code. Most activities from ADF can be found in Synapse. Synapse has Spark notebooks and SQL pools which are not available in ADF and these activities do not require setting up linked services. Synapse allows creation of linked services like ADF to connect to various tools but, does not support SQL Server Integration Services (SSIS) package activity and Power Query activity. Data Factory SSIS integration runtime provides a fully managed execution environment for running SQL Server Integration Services packages. Data Factory supports integration runtime sharing that allows to share/move data across different data factories. Power Query is used for building code-free data preparation and wrangling workflows that are executed using spark. Synapse offers the ability to monitor Spark Jobs for Data FLow by leveraging Synapse Spark Pools.
+   
+Summary:
+   
+|**Feature**|**Azure Data Factory**|**Azure Synapse Analytics**|
+|---|---|---|
+|**Using SSIS and SSIS Integration Runtime**|✓|✗|
+|**Integration Runtime Sharing**|✓|✗|
+|**SSIS Package Activity**|✓|✗|
+|**Support for Power Query Activity**|✓|✗|
+|**GIT Integration**|✓|✓|
+|**Monitoring of Spark Jobs for Data Flow**|✗|✓|
 
 ### Azure Databricks vs Synapse Spark Notebook
 
 Azure Synapse Analytics offers similar functionalities as in Databricks through interactive notebooks for Spark development. Where Databricks supports Spark 3.0, Azure Synapse Spark Pools support Spark 2.4 for big data processing. Databricks notebooks support real-time co-authoring and automated versioning. Synapse notebooks have co-authoring but one must save the notebook before others see the changes and does not have automated versioning. Synapse notebook provide the ability to directly query the data lake from scripts and notebooks but in Databricks one needs to mount a data lake before accessing data. Databricks has machine learning optimized Databricks runtime, GPU enabled clusters, managed and hosted version of MLflow and support for AzureML. Synapse has built-in support for AzureML and open-source MLflow. Spark Structured Streaming as part of Databricks allows to works seamlessly for streaming data and real-time transformations. As a data warehouse, it is possible to ingest real-time data into Synapse using Stream Analytics.
+   
+Summary:
+|**Feature**|**Azure Databricks**|**Azure Synapse Spark Notebooks**|
+|---|---|---|
+|**Real-time co-authoring**|✓|✗|
+|**Automated versioning**|✓|✗|  
+|**Querying Data Lake**|✓|✓|  
+|**GPU-enabled clusters**|✓|✗|  
+|**Delta Lake support**|✓|✓|  
+|**AzureML support**|✓|✓|  
+|**MLflow**|✓ (built-in)|✓ (open-source)|
+|**Real-time Data Ingestion**|Spark Structured Streaming|Link to Azure Stream Analytics|
 
 ### Dedicated SQL Pool vs Serverless SQL Pool vs Spark Pools (Synapse)
 
@@ -101,6 +124,15 @@ Dedicated SQL Pool formerly known as Azure SQL Data Warehouse is a big data solu
 Serverless SQL Pool is a distributed data processing system used for storing and computing large-scale data. It does not require infrastructure set-up. Serverless SQL pool uses a pay-per-use model, so there is no charge for reserving the resources, the charge is based on the data processed by each query. It also allows you to query and ingest data from data lake files and stores data in the Data Lake.
 
 Apache Spark Pool allows to analyze and process large volumes of data using Spark in multiple languages. It also comes with a machine learning library built on top of Spark which provides the ability to create machine learning applications.
+   
+Summary:
+   
+|**Feature**|**Spark Pool**|**Serverless SQL Pool**|**Dedicated SQL Pool**|
+|---|---|---|---|
+|**Querying Data Lake**|✓|✓|✓|  
+|**Infratructure set-up**|✓|✗|✓| 
+|**Storage**|Data Lake|Data Lake|Relational Tables| 
+|**Cost**|Pay per executed Spark job|Pay per query|Pay per DWU (Data Warehouse Units) provisioned| 
 
 ## Next Steps
 

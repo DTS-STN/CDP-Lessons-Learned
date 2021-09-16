@@ -82,7 +82,7 @@ Issues pending to be solved:
    - _Azure Synapse Analytics (SQL DW) connector error:_ "Microsoft SQL: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)"
 3. Unable to write data to Synapse Dedicated SQL Pool
    - _Error:_ Login failed for user '<token-identified principal>'
-   - _Possible Solution:_ Currently, the Access control within Synapse Studio does not apply to dedicated SQL pools. Workspace administrator can create a user manually through T-SQL or they can `add a user` through `SQL Active Directory Admin` option when they navigate to workspace resource in `Azure Portal`.
+   - _Possible Solution:_ Currently, the Access control within Synapse Studio does not apply to dedicated SQL pools. Workspace administrator can create a user manually through T-SQL or `add a user` through `SQL Active Directory Admin` option when navigating to `synapse workspace resource` in `Azure Portal`.
 
 ## Tech Comparisons
 

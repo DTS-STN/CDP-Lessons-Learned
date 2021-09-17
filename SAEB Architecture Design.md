@@ -35,7 +35,7 @@ Azure Synapse is an analytics service that brings together enterprise data wareh
 
 The current state architecture with Azure Synapse is as follows:
 
-![Data Flow using Azure Synapse](assets\images\saeb-arch-design\Data_Flow_1.png)
+![Data Flow using Azure Synapse](assets/images/saeb-arch-design/Data_Flow_1.png)
 
 This required to set up a linked service for Azure Data Lake Gen2 storage account. The Azure Synapse pipeline runs the notebook running on Apache Spark Pool that reads the dummy data available in the storage account, transform data to add a new column, and writes the transformed data back to the same storage account in the form of a csv. Lastly the data is visualized in Power BI desktop upon building connection with output file location in storage account with the use of Azure Data Lake Storage Gen2 connector.
 
@@ -47,7 +47,7 @@ Azure Databricks is an analytics platform based on Apache Spark. It offers noteb
 
 The current state architecture utilizing Data Factory and Databricks is as follows:
 
-![Data Flow using ADF and Databricks](assets\images\saeb-arch-design\DataFlow_2.png)
+![Data Flow using ADF and Databricks](assets/images/saeb-arch-design/DataFlow_2.png)
 
 Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. ADF pipeline orchestrates the execution of Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. 
 

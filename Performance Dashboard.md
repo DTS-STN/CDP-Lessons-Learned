@@ -56,12 +56,12 @@ ESDC teams and performance measurement frameworks consulted to date include: Ser
 
 ### 2. Digital Channel Success Metrics
 
-![Digital Channel Slide 1](assets\images\perf-dash\Slide4.PNG)
-![Digital Channel Slide 2](assets\images\perf-dash\Slide5.PNG)
+![Digital Channel Slide 1](assets/images/perf-dash/Slide4.PNG)
+![Digital Channel Slide 2](assets/images/perf-dash/Slide5.PNG)
 
 ### 3. Learning while building
 
-![Learning While Building Slide 1](assets\images\perf-dash\Slide6.PNG)
+![Learning While Building Slide 1](assets/images/perf-dash/Slide6.PNG)
 
 ## Specific Metric and KPI Lessons
 

@@ -41,7 +41,7 @@ This required to set up a linked service for Azure Data Lake Gen2 storage accoun
 
 ### Azure Data Factory and Azure Databricks
 
-Azure Data Factory is a data integration and ETL tool. It allows to integrate various data sources and allows to manage data both on-prem and in the cloud.
+Azure Data Factory (ADF) is a data integration and ETL tool. It allows to integrate various data sources and manage data both on-prem and in the cloud. It orchestrates the movement and transformation of data from various data stores.
 
 Azure Databricks is an analytics platform based on Apache Spark. It offers notebook-oriented environment which makes it easy to explore and analyze data and manage clusters. It is cloud-based machine learning and big data platform that supports multiple languages.
 
@@ -49,7 +49,7 @@ The current state architecture utilizing Data Factory and Databricks is as follo
 
 ![Data Flow using ADF and Databricks](DataFlow_2.png)
 
-Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. The pipeline runs Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. 
+Before building a data factory pipeline, linked service was created for Databricks Workspace and Azure Data Lake Gen2 storage account. ADF pipeline orchestrates the execution of Databricks notebook that reads data from storage container, transforms data to add a new column and lastly writes the transformed data to the same directory as the source file. From there the data is pushed to Power BI desktop with the help to Azure Data Lake Storage Gen2 connector which is given output file path. 
 
 Power BI’s Databricks and Spark connector can also be used to connect to Databricks database. Both connectors allow you to connect directly to the data source using Direct Query which supports live data refresh as no data is copied to Power BI Desktop. As you create or interact with a visualization, Power BI Desktop queries the underlying data source, so you are always viewing current data. Tiles based on DirectQuery datasets refresh automatically according to a schedule by sending queries to the back-end data source. By default, datasets refresh every hour, but they can be configured as part of dataset settings to be between weekly and every 15 minutes. 
 

@@ -83,6 +83,7 @@ Issues pending to be solved:
 3. Unable to write data to Synapse Dedicated SQL Pool
    - _Error:_ Login failed for user '<token-identified principal>'
    - _Possible Solution:_ Currently, the Access control within Synapse Studio does not apply to dedicated SQL pools. Workspace administrator can create a user manually through T-SQL or `add a user` through `SQL Active Directory Admin` option when navigating to `synapse workspace resource` in `Azure Portal`.
+4. Building SharePoint - Azure Connection requires SharePoint tenant name and tenant ID.
 
 ## Tech Comparisons
 

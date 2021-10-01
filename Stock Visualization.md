@@ -33,7 +33,7 @@ In October of 2021, CDP currently uses PowerBI as our platform for dashboarding 
 - Learn the processes, challenges, opportunities and lessons of creating a custom-coded data visualization for SC Labs.
 
 ### Non-Goals
-- Creating a whole data visualization or dashboard platform.
+- Creating an entire, fleshed-out data visualization or dashboard software platform.
 
 ## Milestones 
 
@@ -51,11 +51,16 @@ Milestone 1 - [ October 14, 2021 ] ?
 The [current solution](http://pvt-pov.service.gc.ca/Reports/powerbi/NCR-BDM-DECD-Client%20Data%20and%20Personalization/Service%20Canada%20Labs%20Overview) uses the Microsoft PowerBI dashboard and data viz software platform to pull Adobe Analytics data and populate metrics within PowerBI reports. The software is functional but is limited because:
 
 - Users are limited in their ability to manipulate data points, ie. cumbersome filter settings must be provided and used.
-- The data visualization tools are not usually aesthetically pleasing.
+- The data visualization tools are not usually aesthetically pleasing
 
 ## Proposed Solution
 
-XYZ
+The proposed solution is a custom-developped data visualization tool...
+
+- Using the React tech-stack.
+- Emulate an "Apple Iphone" widget-platform design.
+- 
+
 
 ## General Lessons Learned
 

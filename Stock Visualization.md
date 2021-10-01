@@ -58,7 +58,10 @@ The [current solution](http://pvt-pov.service.gc.ca/Reports/powerbi/NCR-BDM-DECD
 The proposed solution is a custom-developped data visualization tool...
 
 - Using the React tech-stack.
-- Emulate an "Apple Iphone" widget-platform design.
+- Inspired an "Apple Iphone" widget-platform design.
+
+![apple iphone widgets diagram](https://9to5mac.com/wp-content/uploads/sites/6/2020/06/how-to-use-iphone-ipad-home-screen-widgets-ios-14-walkthrough-4.jpg)
+
 - 
 
 

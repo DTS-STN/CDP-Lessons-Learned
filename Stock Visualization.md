@@ -20,22 +20,23 @@ This "Lessons Learned" document is meant to be a repository of institutional mem
 ## Context
 
 The Client Data and Personalization team is tasked with measuring, tracking and analyzing data to help enable the success of SC Labs and the prototypes that they host. 
-In October of 2021, CDP currently uses PowerBI as our platform for dashboarding and data visualization but the platform has a limited ability to allow users to manipulate and interact with data
+In October of 2021, CDP currently uses PowerBI as our platform for dashboarding and data visualization but the platform has a limited ability to allow users to manipulate and interact with data for the purpose of analysis. The custom-developed Stock Visualization MVP will attempt to increase users' engagement with, and functionality of analysis for, SC Labs data as compared to PowerBI.
 
 ## Goals
 
-- Create a Stock Visualization MVP
-- Emulate a dashboard
-- Measure, benchmark and track metrics that affect digital channel outcomes
-- Retain contextual knowledge around data, business processes, metrics and KPIs
+- Create a custom-coded data visualization MVP.
+- Emulate a current dashboard of SC Labs metrics that is presented through PowerBI.
+- Reinvision this dashboard as a stock visualization for higher user engagement and analytics functionality.
+- Split A/B test the PowerBI dashboard with the Stock Visualization MVP to measure if users show a preference for one versus another. 
+- Learn the processes, challenges, opportunities and lessons of creating a custom-coded data visualization.
 
 ## Milestones 
 
 
-`Start Date: June 1, 2020`
+`Start Date: October 1, 2021`
 
 ```
-Milestone 1 - [ August 1, 2020 ] Create MVP Performance Dashboard
+Milestone 1 - [ October 14, 2021 ] ?
 ```
 
 `End Date: TBD`

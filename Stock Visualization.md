@@ -1,6 +1,6 @@
 # Stock Visualization MVP
 
-status of design doc:
+status of stock visualization doc:
 
 ![draft status](https://img.shields.io/badge/Status-Draft-red)
 <!-- ![review status](https://img.shields.io/badge/Status-Being%20Reviewed-yellow) -->
@@ -25,10 +25,10 @@ In October of 2021, CDP currently uses PowerBI as our platform for dashboarding 
 ## Goals
 
 - Create a custom-coded data visualization MVP.
-- Emulate a current dashboard of SC Labs metrics that is presented through PowerBI.
+- Emulate a current dashboard of SC Labs Adobe Analytics metrics that is presented through PowerBI.
 - Reinvision this dashboard as a stock visualization for higher user engagement and analytics functionality.
 - Split A/B test the PowerBI dashboard with the Stock Visualization MVP to measure if users show a preference for one versus another. 
-- Learn the processes, challenges, opportunities and lessons of creating a custom-coded data visualization.
+- Learn the processes, challenges, opportunities and lessons of creating a custom-coded data visualization for SC Labs.
 
 ## Milestones 
 
@@ -43,7 +43,7 @@ Milestone 1 - [ October 14, 2021 ] ?
 
 ## Existing Solution
 
-http://pvt-pov.service.gc.ca/Reports/powerbi/NCR-BDM-DECD-Client%20Data%20and%20Personalization/Service%20Canada%20Labs%20Overview
+The [current solution](http://pvt-pov.service.gc.ca/Reports/powerbi/NCR-BDM-DECD-Client%20Data%20and%20Personalization/Service%20Canada%20Labs%20Overview) uses the PowerBI 
 
 ## Proposed Solution
 

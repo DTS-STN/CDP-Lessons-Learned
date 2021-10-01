@@ -40,6 +40,13 @@ Milestone 1 - [ August 1, 2020 ] Create MVP Performance Dashboard
 
 `End Date: TBD`
 
+## Existing Solution
+
+XYZ
+
+## Proposed Solution
+
+XYZ
 
 ## General Lessons Learned
 

@@ -2,9 +2,9 @@
 
 status of design doc:
 
-<!-- ![draft status](https://img.shields.io/badge/Status-Draft-red) -->
+![draft status](https://img.shields.io/badge/Status-Draft-red)
 <!-- ![review status](https://img.shields.io/badge/Status-Being%20Reviewed-yellow) -->
-![finalized status](https://img.shields.io/badge/Status-Finalized-green)
+<!-- ![finalized status](https://img.shields.io/badge/Status-Finalized-green) -->
 <!-- ![archived](https://img.shields.io/badge/Status-Archived-lightgrey) -->
 
 Authors: Jordan Morrison, Maciej Czop, Ashley Evans

@@ -44,7 +44,7 @@ Upon gaining permissions to run a synapse pipeline, two different pipelines were
 
 The current state architecture with Azure Synapse that leverages Data Flow for data transformation is as follows:
 
-![Synapse Pipeline with Data Flow](assets/images/Synapse_SharePoint_Azure_Pipeline_1.png)
+![Synapse Pipeline with Data Flow](assets/images/Synapse_SharePoint_Azure_Pipeline1.png)
 
 The synapse pipeline runs a Logic Apps Workflow _(see Workflow #1 in Logic Apps Workflow)_ that pulls data from SharePoint Online and drops it in the blob storage in excel file format. Then the raw data is passed to the data flow that transforms data to add a new column and stores transformed data in Azure Synapse Dedicated SQL Pool. The transformed data is then pushed to powerBI desktop with the help of Azure Synapse Analytics connector. However, to this date, a successful connection has not been built between power BI and Azure Synapse Analytics _(see Issue #1 in Unresolved Issues under Problems/Blockers)_.
 

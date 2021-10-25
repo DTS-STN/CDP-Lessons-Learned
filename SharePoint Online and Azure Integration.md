@@ -117,5 +117,9 @@ Issues pending to be solved:
         -	Add IP address in the Networking Tab under Security Section of Azure Synapse workspace resource in Azure Portal to give full access to the workspace 
 
 ## Next Steps
-The next step is to build connection with existing Power BI report server. The goal will be to build a repeatable pipeline so that one runs the pipeline and as an end result the data is refreshed in Power BI report server.
+The next step is to try building a connection with Power BI using:
+1. Databrciks Spark Tables
+2. Synapse Reporting
+
+The goal will be to build a repeatable pipeline so that one runs the pipeline and as an end result the data is refreshed in a Power BI report.
 

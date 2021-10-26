@@ -7,11 +7,11 @@ status of design doc:
 ![finalized status](https://img.shields.io/badge/Status-Finalized-green)
 <!-- ![archived](https://img.shields.io/badge/Status-Archived-lightgrey) -->
 
-Authors: Ashley Evans
+Authors: Maciej Czop
 
 Reviewers: 
 
-- Christine Hagyard [X, 2021]
+- Ashley Evans [X, 2021]
 
 ## Overview  
 
@@ -29,10 +29,10 @@ Reviewers:
 ## Milestones 
 
 
-`Start Date: June 1, 2020`
+`Start Date: October 1, 2020`
 
 ```
-Milestone 1 - [ August 1, 2020 ] Create SC Labs dashboard
+Milestone 1 - [ August x, 2020 ] 
 ```
 
 `End Date: TBD`
@@ -49,15 +49,19 @@ Lesson Learned
 Lesson Learned
 
 
-## Specific Metric and KPI Lessons
+## React Lessons
 
-### 1. Example KPI
+### 1. Javascript Code
 
-***Data source: **
+***Beacon info ***
 
-Lesson Learned
+dcterms.title this is based on how you/they want to report on pages
+dcterms.language needs to be fra or eng
+dcterms.creator = Employment and Social Development Canada/Emploi et Développement social Canada
+dcterms.accessRights = 2
+dcterms.service  this is one name for the whole site/product starting with ESDC-EDSC_ and needs to be bilingual
 
-### 2. Example metric
+### 2. Lesson Learned
 
 ***Data Source: ***
 

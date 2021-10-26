@@ -55,11 +55,11 @@ Lesson Learned
 
 ***Beacon info ***
 
-dcterms.title this is based on how you/they want to report on pages
-dcterms.language needs to be fra or eng
-dcterms.creator = Employment and Social Development Canada/Emploi et Développement social Canada
-dcterms.accessRights = 2
-dcterms.service  this is one name for the whole site/product starting with ESDC-EDSC_ and needs to be bilingual
+- dcterms.title this is based on how you/they want to report on pages
+- dcterms.language needs to be fra or eng
+- dcterms.creator = Employment and Social Development Canada/Emploi et Développement social Canada
+- dcterms.accessRights = 2
+- dcterms.service  this is one name for the whole site/product starting with ESDC-EDSC_ and needs to be bilingual
 
 ### 2. Lesson Learned
 

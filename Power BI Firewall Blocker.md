@@ -39,5 +39,6 @@ One workaround is to connect to Azure Synapse Analytics or Databricks Spark Tabl
 
 This workaround was used for the Nov29 deliverable.
 
-The implications of this workaround include:
-- 
+The implications of this workaround is that the user must not lose access to ESDC Azure from their ESDC machine beacause if the access gets restricted to SAVE-D, then the user will not be able to connect to the source and create Power BI reports. Power BI Desktop application in SAVE-D cannot establish connection to these services to date.
+
+### Effects on SAEB Architecture

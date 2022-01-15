@@ -46,6 +46,20 @@ The firewall on ESDC network doesn't allow outogoing communication on TCP port 1
 
 To connect to SQL resources (dedicated SQL pools and serverless SQL pool) in Synapse workspace using Power BI, we need to make sure that the firewall on network and on local computer allows outgoing communication on TCP ports 1443. Additionally, we need to also allow outgoing communication to TCP ports 80 and 443. See this [Microsoft documentation](https://docs.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshooting-scheduled-refresh-azure-sql-databases) for reference.
 
-## Debugging
+## Possible Solutions/Debugging
+
+### Whitelist Microsoft Azure IPs to connect to the Azure services and resources
+To allow Power BI to connect to Azure services and resources, we need to open inbound connection to the list of Azure IP addresses allowing them to go through the firewall. Downside of this solution is that IP addresses can change without notice. However, Mircosoft updates the [json file](https://www.microsoft.com/en-us/download/details.aspx?id=56519&ranMID=24542&ranEAID=je6NUbpObpQ&ranSiteID=je6NUbpObpQ-UUhkK.v_wV9lbeB1kw8tIw&epi=je6NUbpObpQ-UUhkK.v_wV9lbeB1kw8tIw&irgwc=1&OCID=AID2200057_aff_7593_1243925&tduid=%28ir__t3q9fdx3vokf6y2olaqnlfwxif2xo6fy6zz3iq6r00%29%287593%29%281243925%29%28je6NUbpObpQ-UUhkK.v_wV9lbeB1kw8tIw%29%28%29&irclickid=_t3q9fdx3vokf6y2olaqnlfwxif2xo6fy6zz3iq6r00) containing IPs weekly so, to avoid updating the IPs manually, we can write a script that downloads the file and parses it and adds them to firewall rules. This process requires involvement from sercurity team to open up the IPs listed in json file. 
+
+To avoid opening up the IPs that can change regularly, you can make use of Fully Qualified Domain Names (FQDN). These can be found in this guide by Microsoft. The advantage to using this approach is that FQDNs remain same while IPs pointing to FQDN can change.
+
+If ESDC uses fixed set of public IPs for outbound communication then you need to open inbound connection to those specific IPs and add them to Azure SQL instance's firewall rules. 
+
 ### Configure a Azure VM and data gateways in the Power BI service
 Alternatively, configuring VNets and the Power BI Gateway (in a VM) provides secure access between Power BI and Azure SQL database without opening up the firewall to all Azure Services. The steps on how to set this up are listed in this [Microsoft blog](https://devblogs.microsoft.com/premier-developer/secure-access-to-azure-sql-servers-for-power-bi/).
+
+## Resources
+- https://docs.microsoft.com/en-us/azure/synapse-analytics/security/synapse-workspace-ip-firewall
+- https://community.powerbi.com/t5/Service/Whitelisting-of-PowerBI-IP-address-range-in-Firewall/m-p/1072193
+- https://community.powerbi.com/t5/Service/Mass-IP-Whitelisting-for-Azure-Datacenter/m-p/173665
+

@@ -55,11 +55,14 @@ To avoid opening up the IPs that can change regularly, you can make use of Fully
 
 If ESDC uses fixed set of public IPs for outbound communication then you need to open inbound connection to those specific IPs and add them to Azure SQL instance's firewall rules. 
 
+### Set up Private Link
+Azure SQL Database supports Private Link which allows to connect Azure SQL Database via a private endpoint (a private IP address within a specific VNet and subnet). This [Microsoft document](https://docs.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview) outlines how to set up a Private Link.
+
 ### Configure a Azure VM and data gateways in the Power BI service
-Alternatively, configuring VNets and the Power BI Gateway (in a VM) provides secure access between Power BI and Azure SQL database without opening up the firewall to all Azure Services. The steps on how to set this up are listed in this [Microsoft blog](https://devblogs.microsoft.com/premier-developer/secure-access-to-azure-sql-servers-for-power-bi/).
+Alternatively, configuring VNets and the Power BI Gateway in a VM provides secure access between Power BI and Azure SQL database without opening up the firewall to all Azure Services. The steps on how to set this up are listed in this [Microsoft blog](https://devblogs.microsoft.com/premier-developer/secure-access-to-azure-sql-servers-for-power-bi/) and well as in the [Azure blog](https://azure.microsoft.com/en-us/blog/securing-the-connection-between-power-bi-and-azure-sql-database/).
 
 ## Resources
 - https://docs.microsoft.com/en-us/azure/synapse-analytics/security/synapse-workspace-ip-firewall
 - https://community.powerbi.com/t5/Service/Whitelisting-of-PowerBI-IP-address-range-in-Firewall/m-p/1072193
 - https://community.powerbi.com/t5/Service/Mass-IP-Whitelisting-for-Azure-Datacenter/m-p/173665
-
+- https://docs.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview

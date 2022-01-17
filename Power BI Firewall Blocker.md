@@ -8,7 +8,7 @@ This "Lessons Learned" document is meant to be a repository of institutional mem
 
 ## Context
 
-Currently there is a problem with PowerBI connections being blocked on some firewall. Regardless of the data source (whether its Databricks Spark Tables or Synapse Analytics), Power BI Desktop is required to create reports. In order to build these reports in Power BI Desktop requires establishing connection to these sources which fails with an error due to firewall setup.
+Currently there is a problem with Power BI connections (Databricks or Synapse Analytics connector) being blocked on firewall. Power BI Desktop is the tool required to create reports however, this requires establishing connection to these sources which fails due to firewall setup on ESDC network.
 
 Attempting to connect Power BI desktop with Azure Databricks using Azure Databricks connector and Spark connector results in the following error
 
@@ -18,20 +18,16 @@ Additionally, attempting to connect Power BI Desktop to Synapse SQL DW using Azu
 
 ![Synapse SQL DW Connection Error](assets/images/synapse-sql-dw-connection-error.png)
 
+One cannot connect to these sources directly from www.powerbi.com, as the service directs you to Power BI desktop to connect to the source. 
+
+Synapse Studio allows to use data inside Synapse Analytics to create reports inside Power BI. This is done upon creating a Power BI workspace/linked service and then clicking _New Power BI dataset_ on _Power BI datsets_ page listed under _Power BI_ section in the _Develop_ tab, which automatically lists the available SQL Pools inside Synapse Analytics and the respective downloadable data source file that automatically opens in Power BI Desktop to establish connection to Synapse SQL DW as the data source has to be created from a Power BI Desktop. Similarly, this also results in the following error
+
+![Synapse Analytics Connection Error](assets/images/synapse-analytics-connection-error.png)
+
 Resolving this issue will involve stakeholders form both ESDC and SSC so, the focus of this exercise is to discover the possible workarounds to the problem before seeking networking help to open Ports and IPs in the Firewall.
 
 ## Goals
 The goal of this exercise is to have a reliable solution in place. 
-
-To do this, following questions need to be answered.
-- What is the suggested workaround? What other workarounds might there be?
-- What are the implications of the workaround?
-- Is it sustainable? For how long?
-- How will it effect the SAEB architecture? 
-- Will it have security implications? 
-- What is the firewall blocking? 
-- What can we determine on our own though debugging tools?
-- What do we actually need help determining? Who, might that be?
 
 ## Suggested Workaround
 ### Connecting to Azure Synapse and Databricks off VPN

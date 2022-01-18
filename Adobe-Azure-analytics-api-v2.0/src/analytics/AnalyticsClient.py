@@ -1,7 +1,5 @@
 #imports
-from azure.storage.blob import BlobClient 
 import os
-from datetime import datetime
 from pytz import timezone
 import webbrowser
 from urllib.parse import urlparse

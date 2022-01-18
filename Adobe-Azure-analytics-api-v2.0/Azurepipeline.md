@@ -73,27 +73,50 @@ https://portal.azure.com login and then select **Data Factory**.
 
 
 
-## Create linked services
+## Access Azure linked services
 You author two linked services in this section: 
     
-- An **Azure Storage linked service** that links an Azure storage account to the data factory.  
+- An **Azure Databrick linked service** that links an Azure Databricks to the data factory.  
+
+- An **Azure Key Vault linked service** that links an Azure Databricks to Azure Key Vault
 
 
-### Create an Azure Storage linked service
+### Access Databrick linked service
 
 1. On the home page, switch to the **Manage** tab in the left panel. 
 
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-LinkedService-ADF.png)
+
+2.Click on the Databricks Linked Service
+
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-LinkedService-ADF-connection.png)
+
+3.The Linked Service authenticates through Azure Key Vault Secret
 
 
-1. Select **Connections** at the bottom of the window, and then select **+ New**. 
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-LinkedService-ADF-connection_value.png)
 
 
-1. In the **New Linked Service** window, select **Data Store** > **Azure Blob Storage**, and then select **Continue**. 
+### Access Azure Key Vault linked service(scope)
+1.Access Databricks Notebook
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-Notebook-open.png)
 
+2.Create a scope for Databricks 
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-scope.png)
 
-1. For **Storage account name**, select the name from the list, and then select **Save**. 
+3.The scope created is used to read private key stored in Azure Key Vault
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-Notebook-content.png)
 
+```python
 
+    def _read_private_key(self):
+        # Request private Key
+        # This secret scope is backed by Azure Key vault
+        aa_private_key = dbutils.secrets.get(scope = "scope_name", key = "key_name")
+        private_key = bytes('-----BEGIN PRIVATE KEY-----\n'+aa_private_key+'\n-----END PRIVATE KEY-----', 'utf-8')
+        return private_key
+
+```
 
 
 ## Access to a pipeline

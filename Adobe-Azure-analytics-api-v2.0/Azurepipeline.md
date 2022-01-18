@@ -33,39 +33,42 @@ If you don't have Azure portal access, please connect with the system administra
 
 
 
-### Upload the Python script to your Blob storage account
-1. Create a Python file  with the following content: 
-
-    ```python
-
-    
-    if __name__ == "__main__":
-        main()
-    ```
-
 ## Cloud versus On-Prem
 
-1.key difference between running python notebook on cloud versus on prem is that where private key is stored.
+Key difference between running python notebook in cloud versus OnPrem is that where private key is stored.
 
-Read private key stored in Azure Key Vault
+### Run Python Notebook in cloud reads private key stored in Azure Key Vault
+[AnalyticsClient - Cloud(Azure) Class](src/analytics/AzureAnalyticsClient.py)
+
 ```python
-    def _read_private_key(self):
 
+    def _read_private_key(self):
+        # Request private Key
+        # This secret scope is backed by Azure Key vault
         aa_private_key = dbutils.secrets.get(scope = "scope_name", key = "key_name")
         private_key = bytes('-----BEGIN PRIVATE KEY-----\n'+aa_private_key+'\n-----END PRIVATE KEY-----', 'utf-8')
         return private_key
 
 ```
+### Run Python script OnPrem reads private key locally stored in OnPrem machine.
+[AnalyticsClient - OnPrem Class](src/analytics/AnalyticsClient.py)
 
+```python
 
-
-
+    def _read_private_key(self):
+        # Request Access Key
+        # This Needs to point at where your private key is on the file system
+        keyfile = open(self.private_key_location, 'r')
+        private_key = keyfile.read()
+        return private_key
+```
 ## Access to a data factory
 
 1. Launch **Microsoft Edge** or **Google Chrome** web browser. Currently, Data Factory UI is supported only in Microsoft Edge and Google Chrome web browsers,go to 
 https://portal.azure.com login and then select **Data Factory**. 
 
 ![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Data-Factory-access-portal.png)
+
 
 
 
@@ -96,9 +99,24 @@ You author two linked services in this section:
 ## Access to a pipeline
 
 
-1.Click on 'Open' to launch Azure Data Factory Studio ,and click on the button shown below:
-  
-![](docs\images\Azure-Data-Factory-access-pipeline.png)
+1.Click on 'Open' to launch Azure Data Factory Studio 
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Data-Factory-open.png)
+
+
+2.Follow the instructions below:  
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Data-Factory-access-pipeline.png)
+
+3.Access to the Databrick activity:
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-open.png)
+
+
+4.View the Databrick Notebook with the following content: [AnalyticsClient - Cloud(Azure) Class](examples/DatabricksNotebook/DatabricksExample.ipynb)
+![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-Notebook.png)
+
+
+
+
+
 
 ## Trigger a pipeline run
 
@@ -128,22 +146,22 @@ You author two linked services in this section:
   
 
 ## Verify the output
-Verify that the output file is created in the sclabs-site-analytics folder of the specified container based on parameter containerName below. 
+Verify that the output file *blob_name.csv* is created under the *sclabs-site-analytics* folder based on parameter *containerName* below. 
 
-```
+```python
 blob = BlobClient.from_connection_string(conn_str=conn_string, container_name=containerName, blob_name="sclabs-site-analytics/blob_name.csv")
 ```
 
-The file should have data in a given period (start_date to end_date based on input parameter). For example: 
+Verify the data based on input parameters. 
 
 
 ![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Data-Factory-result.png)
 
 ## Summary
-The pipeline in this sample transforms data by using a Databrick activity and Azure Key Vault linked service. You learned how to: 
+The pipeline in this sample ingests data by using a Databrick activity and Azure Key Vault linked service. You learned how to: 
 
-> * Create a data factory. 
-> * Create a pipeline that uses a Databrick activity.
+> * Access a data factory. 
+> * Access a pipeline that uses a Databrick activity.
 > * Trigger a pipeline run.
 > * Monitor the pipeline run.
 

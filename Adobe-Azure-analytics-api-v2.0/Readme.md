@@ -2,7 +2,7 @@
 
 Download Reports data utilising the Adobe.io version 2.0 API locally.
 
-To Integrate with Cloud (Azure) ,please check [Integrate with Azure](AzureReadme.md)
+To Integrate with Cloud (Azure) ,please check [Integrate with Azure](Azurepipeline.md)
 
 
 
@@ -121,7 +121,7 @@ Perform the authentication
 aa._authenticate()
 ```
 
-For a demo notebook, please refer to the [Jupyter Notebook - OAuth example](examples/OAuthDemo.ipynb)
+For a demo notebook, please refer to the [Jupyter Notebook - OAuth example](examples/JupyterNotebook/OAuthDemo.ipynb)
 
 
 
@@ -209,12 +209,22 @@ blob = BlobClient.from_connection_string(conn_str=conn_string, container_name=co
 blob.upload_blob(str(data.to_csv()),overwrite=True)
 ```
 
+## Unit Test
+
+Run the following code to unit test the code
+
+```python
+py.test Adobe-Azure-analytics-api-v2.0/tests/test_core.py
+# or
+pytest 
+```
+
 
 # Next Steps
 
 [Connect with Power BI](PowerBIReadme.md)
 
-[Integrate with Azure](AzureReadme.md)
+[Integrate with Azure](Azurepipeline.md)
 
 # Issues, Bugs and Suggestions:
 

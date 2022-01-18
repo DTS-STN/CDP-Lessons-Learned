@@ -61,8 +61,9 @@ If firewall can be configured to allow connections to Fully Qualified Domain Nam
 
 If ESDC uses fixed set of public IPs for outbound communication then you need to open inbound connection to those specific IPs by adding them to Azure SQL instance's firewall rules. 
 
-## Resources
+## References
 - https://docs.microsoft.com/en-us/azure/synapse-analytics/security/synapse-workspace-ip-firewall
 - https://community.powerbi.com/t5/Service/Whitelisting-of-PowerBI-IP-address-range-in-Firewall/m-p/1072193
 - https://community.powerbi.com/t5/Service/Mass-IP-Whitelisting-for-Azure-Datacenter/m-p/173665
 - https://docs.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview
+- https://community.powerbi.com/t5/Desktop/Power-BI-Desktop-issues-with-company-proxy-when-using-Databricks/td-p/1484714

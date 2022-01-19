@@ -29,18 +29,20 @@ Resolving this issue will involve stakeholders form both ESDC and SSC so, the fo
 ## Goals
 The goal of this exercise is to have a reliable solution in place. 
 
-## Suggested Workaround
-### Connecting to Azure Synapse and Databricks off VPN
-One workaround is to connect to Azure Synapse Analytics or Databricks Spark Tables from Power BI Desktop off-network (off-VPN) to build reports. Once the report has been created, log back into VPN and upload the report on Power BI Report Server so, it can be viewed by other memebers of the team.
-
-This workaround was used for the Nov29 deliverable. If access to ESDC Azure gets restricted to VPN, then users will not be able to connect to the source and create Power BI reports as Power BI Desktop application running on VPN and VDI cannot establish connection to these services to date due to firewall setup.
-
 ## What is Firewall blocking?
-The firewall on ESDC network/virtual desktop doesn't seem to allow outgoing communication on TCP port 1433. However, the firewall on local computer (ESDC machine) seems to be allowing outgoing communication to TCP port 1433 since Power BI can connect to Synapse Dedicated SQL Pool off VPN.
+The firewall on ESDC virtual network and virtual desktop doesn't seem to allow outgoing communication on TCP port 1433. However, the firewall on ESDC provided machine seems to be allowing outgoing communication to TCP port 1433 since Power BI can connect to Synapse Dedicated SQL Pool when disconnected to VPN.
 
 To connect to SQL resources (dedicated SQL pools and serverless SQL pool) in Synapse workspace using Power BI, we need to make sure that the firewall on network and on local computer allows outgoing communication on TCP port 1443. Additionally, we need to also allow outgoing communication to TCP ports 80 and 443. See this [Microsoft documentation](https://docs.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshooting-scheduled-refresh-azure-sql-databases) for reference.
 
+## Suggested Workaround
+### Connecting to Azure Synapse and Databricks from ESDC machines off VPN
+One workaround to building Power BI reports is to connect to Azure Synapse Analytics and Databricks Spark Tables from Power BI Desktop on ESDC provided laptop disconnected from VPN. Once the report has been created, you will need to log back into VPN and upload the report on Power BI Report Server so, it can be viewed by other memebers of the team.
+
+This workaround was used for the Nov29 deliverable. If access to ESDC Azure gets restricted to VPN, then users will not be able to connect to the source and create Power BI reports. Power BI Desktop application running on ESDC provided laptops connected to VPN and ESDC provided equipment (like virtual desktop, ex. SAVE-D) cannot establish connection to these services to date due to firewall setup.
+
 ## Debugging Options
+
+The following debugging options can be tried to help resolve this problem. The first and second option may not require any assistance from the security team but, third option will need full involvment from the security team.
 
 ### 1. Set up Private Link
 Azure Synapse Analytics (dedicated SQL pool only) supports Private Link which allows to connect Azure SQL DW via a private endpoint (a private IP address within a specific Azure VNet and subnet). Creating a private endpoint allows traffic in Azure virtual network to privately connect to on-premises resources. This network can be used to communicate to on-premises applications like Power BI Desktop using Site-to-Site VPN or Azure ExpressRoute or Point-to-Site VPN (see [this link](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) for details). To connect to your on-premises services, you need to set up a Private Link Service for your private endpoint to connect to. This [Microsoft document](https://docs.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview) outlines how to set up a Private Link.

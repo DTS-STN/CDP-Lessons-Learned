@@ -34,11 +34,46 @@ The firewall on ESDC virtual network and virtual desktop doesn't seem to allow o
 
 To connect to SQL resources (dedicated SQL pools and serverless SQL pool) in Synapse workspace using Power BI, we need to make sure that the firewall on network and on local computer allows outgoing communication on TCP port 1443. Additionally, we need to also allow outgoing communication to TCP ports 80 and 443. See this [Microsoft documentation](https://docs.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshooting-scheduled-refresh-azure-sql-databases) for reference.
 
-## Suggested Workaround
-### Connecting to Azure Synapse and Databricks from ESDC machines off VPN
+## Suggested Workarounds
+### 1. Connecting to Azure Synapse and Databricks from ESDC machines off VPN
 One workaround to building Power BI reports is to connect to Azure Synapse Analytics and Databricks Spark Tables from Power BI Desktop on ESDC provided laptop disconnected from VPN. Once the report has been created, you will need to log back into VPN and upload the report on Power BI Report Server so, it can be viewed by other memebers of the team.
 
-This workaround was used for the Nov29 deliverable. If access to ESDC Azure gets restricted to VPN, then users will not be able to connect to the source and create Power BI reports. Power BI Desktop application running on ESDC provided laptops connected to VPN and ESDC provided equipment (like virtual desktop, ex. SAVE-D) cannot establish connection to these services to date due to firewall setup.
+This workaround was used for the Nov29 deliverable. If access to Azure gets restricted to VPN, then users will not be able to connect to the source and create Power BI reports. Power BI Desktop application running on ESDC provided laptops connected to VPN and ESDC provided equipment (like virtual desktop, ex. SAVE-D) cannot establish connection to these services to date due to firewall setup.
+
+To connect to Azure Databricks from ESDC provided machine disconnected from VPN, the steps involved are:
+1. Start Power BI Desktop.
+2. Click Get data or File > Get data.
+3. Click Get data to get started.
+4. Choose the Azure Databricks connector, and click Connect.
+5. Get and enter Server Hostname and HTTP Path from JDBC/ODBC tab under Advanced Options on the Databricks Cluster page. 
+6. Select your Data Connectivity mode. 
+7. Click OK.
+8. Enter ESDC Username/Password for authentication. Other authentication methods include Azure Databricks Personal Access Token and Azure Active Directory.
+9. Click Connect.
+
+Once the connection is established, you should be able to select the Azure Databricks data to query from the Power BI Navigator.
+![Databricks Spark Tables in Power BI]()
+
+To connect to Azure Synapse Analytics from ESDC provided machine disconnected from VPN, the steps involved are:
+1. Start Power BI Desktop.
+2. Click Get data or File > Get data.
+3. Click Get data to get started.
+4. Choose the Azure Synapse Analytics connector, and click Connect.
+5. Get and enter Server and Database from JDBC connection string of Dedicated SQL Pool Resource in Azure Portal. 
+6. In Advanced Options, select _Include relationship columns_
+7. Select your Data Connectivity mode. For real-time access to information in your Azure Synapse Analytics, use DirectQuery. 
+8. Click OK.
+9. Enter SQL Login (SQL admin username and password) for authentication. Other authentication methods include ESDC Username/Password and Azure Active Directory.
+10. Click Connect.
+
+Once the connection is established, you should be able to select the Synapse Analytics tables to query from the Power BI Navigator.
+![Synapse Analytics Tables in Power BI]()
+
+### 2. Upload Power BI Report on Server with Databricks and Synapse Analytics connection 
+Another workaround is to create an empty report on ESDC provided machine disconnected from VPN with Databricks and Synapse database connections and upload that onto the Power BI Report Server so anyone from the team can download the report and create views using those data sources. 
+
+### Data Refresh in Power BI Report Server
+Once the report is uploaded on Power BI Report Server, you need to set credentials for each data sources on Data Sources Page to enable scheduled data refresh. 
 
 ## Debugging Options
 
@@ -69,3 +104,6 @@ If ESDC uses fixed set of public IPs for outbound communication then you need to
 - https://community.powerbi.com/t5/Service/Mass-IP-Whitelisting-for-Azure-Datacenter/m-p/173665
 - https://docs.microsoft.com/en-us/azure/azure-sql/database/private-endpoint-overview
 - https://community.powerbi.com/t5/Desktop/Power-BI-Desktop-issues-with-company-proxy-when-using-Databricks/td-p/1484714
+- https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/power-bi#connect-with-power-bi-desktop
+- https://docs.microsoft.com/en-us/power-bi/connect-data/service-azure-sql-data-warehouse-with-direct-connect
+- https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/synapse-analytics/sql/tutorial-connect-power-bi-desktop.md

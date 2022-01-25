@@ -74,7 +74,8 @@ However, this solution is dependent on EDSC machine availablity as it will be re
 
 ### Data Refresh in Power BI Desktop and Report Server
 Refreshing data in Power BI desktop, requires ESDC provided machine disconnected from VPN and Windows Login for authentication. Otherwise for every dataset you try to refresh (on VDI) you run into following error message.
-![error_refreshing_from_desktop]()
+
+![error_refreshing_from_desktop](assets/images/refresh_error.png)
 
 After the report has been uploaded on Power BI Report Server, it requires you to set credentials for each data sources on Data Sources Page to enable scheduled data refresh. Databricks and Synapse data sources allow for Windows and Basic authentication. However, Power BI Report server does not work with Windows Authentication.
 ![error_refreshing_from_server]()

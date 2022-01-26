@@ -14,13 +14,13 @@ Attempting to connect Power BI desktop with Azure Databricks using Azure Databri
 
 ![Azure Databricks Connection Error](assets/images/az-databricks-connection-error.png)
 
-Additionally, attempting to connect Power BI Desktop to Synapse SQL DW using Azure Synapse Analytics connector and the SQL Server Database connector also results in the following error
+Additionally, attempting to connect Power BI Desktop to Synapse SQL DW using Azure Synapse Analytics connector and the SQL Server Database connector also results in the following error.
 
 ![Synapse SQL DW Connection Error](assets/images/synapse-sql-dw-connection-error.png)
 
 One cannot connect to these sources directly from www.powerbi.com, as the service directs you to Power BI desktop to connect to the source. 
 
-Synapse Studio allows to use data inside Synapse Analytics to create reports inside Power BI. This is done upon creating a Power BI workspace/linked service and then clicking _New Power BI dataset_ on _Power BI datsets_ page listed under _Power BI_ section in the _Develop_ tab, which automatically lists the available SQL Pools inside Synapse Analytics and the respective downloadable data source file that automatically opens in Power BI Desktop to establish connection to Synapse SQL DW as the data source has to be created from a Power BI Desktop. Similarly, this also results in the following error
+Synapse Studio allows to use data inside Synapse Analytics to create reports inside Power BI. This is done upon creating a Power BI workspace/linked service and then clicking _New Power BI dataset_ on _Power BI datsets_ page listed under _Power BI_ section in the _Develop_ tab, which automatically lists the available SQL Pools inside Synapse Analytics and the respective downloadable data source file that automatically opens in Power BI Desktop to establish connection to Synapse SQL DW as the data source has to be created from a Power BI Desktop. Similarly, this also results in the following error.
 
 ![Synapse Analytics Connection Error](assets/images/synapse-analytics-connection-error.png)
 
@@ -72,9 +72,9 @@ Once the connection is established, you should be able to select the Synapse Ana
 ![Synapse Analytics Connection](assets/images/synapse-powerbi-connection.png)
 
 ### 2. Upload Power BI Report on Server with Databricks and Synapse Analytics connection 
-Another workaround is to create an empty report on ESDC provided machine disconnected from VPN with Databricks and Synapse database connections and upload that onto the Power BI Report Server so anyone from the team can download the report and create views using those data sources. 
+Another workaround is to create an [empty report](https://pvt-pov.service.gc.ca/Reports/powerbi/NCR-BDM-DECD-Client%20Data%20and%20Personalization/Testing/SynapseDatabricksConnection) on ESDC provided machine disconnected from VPN with Databricks and Synapse database connections and upload that onto the Power BI Report Server so anyone from the team can download the report and create views using those data sources. 
 
-However, this solution is dependent on EDSC machine and team member availablity as they will be required to refresh and edit connections with Databricks and Synapse. They will need to frequently update the empty report so that the data is available to the users to generate dashboards. Adding more and more tables to the report will increase the time it takes for the report to fully load, however the user can delete the unnecessary tables after the report loads. 
+However, this solution is dependent on EDSC machine and team member availablity as they will be required to refresh and edit connections with Databricks and Synapse. They will need to frequently update the empty report so that the current data is available to the users for dashboard creation. Users may delete the unnecessary tables after downloading the report. 
 
 ### Data Refresh in Power BI Desktop and Report Server
 Refreshing data in Power BI desktop, requires ESDC provided machine disconnected from VPN and Windows Login for authentication. Otherwise for every dataset you try to refresh (on VDI) you run into following error message.
@@ -83,10 +83,11 @@ Refreshing data in Power BI desktop, requires ESDC provided machine disconnected
 |--|--|
 |![error_refreshing_from_desktop](assets/images/refresh_error.PNG)|![databricks_error_refreshing_from_desktop](assets/images/databricks_refresh_error.PNG)|
 
-
 After the report has been uploaded on Power BI Report Server, it requires you to set credentials for each data sources on Data Sources Page to enable scheduled data refresh. Synapse allows for Windows and Basic authentication however, none of those methods work with ESDC email and password. Whereas Databricks does not show up in the list of data sources even if the report is connected to it.
 
 ![error_refreshing_from_server](assets/images/refresh-error-report-server.png)
+
+Currently, you can only refresh data in Synapse and Databricks from Power BI Desktop but, not from Power BI Report Server. This is because Power BI Report Server can only be accessed from ESDC machine connected to VPN or from the VDI.
 
 ## Debugging Options
 

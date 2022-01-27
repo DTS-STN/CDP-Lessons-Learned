@@ -222,9 +222,9 @@ pytest
 
 # Next Steps
 
-[Connect with Power BI](PowerBIReadme.md)
-
 [Integrate with Azure](Azurepipeline.md)
+
+[Connect with Power BI](PowerBIReadme.md)
 
 # Issues, Bugs and Suggestions:
 

@@ -421,7 +421,7 @@ class analytics_client:
         
         tmp_report_object = self.report_object
         
-        item_ids = df_page.filter(regex='^itemId').sort_values().array
+        item_ids = df_page.filter(regex='^itemId').array
         
         for idx in range(len(dimensions)):
             dimension = dimensions[idx]

@@ -71,6 +71,13 @@ Once the connection is established, you should be able to select the Synapse Ana
 
 ![Synapse Analytics Connection](assets/images/synapse-powerbi-connection.png)
 
+To upload a report to **Power BI Report Server**:
+1. Navigate to [ESDC Report Server](https://pvt-pov.service.gc.ca/Reports/browse/NCR-BDM-DECD-Client%20Data%20and%20Personalization)
+2. Click Upload on top right corner
+3. Select a .pbix file from the file explorer
+
+To refresh data in your Power BI report in Power BI Report Server, you must create a scheduled refresh plan. You create this plan in the _Manage_ area of a Power BI report on the report server.
+
 ### 2. Upload Power BI Report on Server with Databricks and Synapse Analytics connection 
 Another workaround is to create an [empty report](https://pvt-pov.service.gc.ca/Reports/powerbi/NCR-BDM-DECD-Client%20Data%20and%20Personalization/Testing/SynapseDatabricksConnection) on ESDC provided machine disconnected from VPN with Databricks and Synapse database connections and upload that onto the Power BI Report Server so anyone from the team can download the report and create views using those data sources. 
 

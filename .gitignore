@@ -9,3 +9,7 @@ logs/*
 *.pem
 *.key
 .env
+*.vscode
+.vscode/launch.json
+**/debug
+setup.py

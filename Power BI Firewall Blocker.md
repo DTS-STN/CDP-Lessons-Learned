@@ -99,7 +99,7 @@ So, currently PowerBI reports with Synapse and Databricks connection can not be 
 
 ![error_refreshing_from_server](assets/images/refresh-error-report-server.png)
 
-This has a huge impact on the ability to service basic functions as a reporting suite as data from Synapse Analytics and Databricks Spark Tables cannot be refreshed real-time or on schedule.
+This is a major blocker as data from Synapse Analytics and Databricks Spark Tables cannot be refreshed on a schedule and has a huge impact on the ability to service basic functions as a reporting suite. 
 
 ## Debugging Options
 

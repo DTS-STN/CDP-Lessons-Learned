@@ -85,18 +85,21 @@ Another workaround is to create an [empty report](https://pvt-pov.service.gc.ca/
 
 However, this solution is dependent on EDSC machine and team member availablity as they will be required to refresh and edit connections with Databricks and Synapse. They will need to frequently update the empty report so that the current data is available to the users for dashboard creation. Users may delete the unnecessary tables after downloading the report. 
 
-### Data Refresh in Power BI Desktop and Report Server
+## Data Refresh in Power BI Desktop
 Refreshing data in Power BI desktop, requires ESDC provided machine disconnected from VPN and Windows Login for authentication. Otherwise for every dataset you try to refresh in Power BI Desktop (on VDI or on VPN) you run into following error message.
 
 |Error trying to refresh synapse tables|Error trying to refresh databricks tables|
 |--|--|
 |![error_refreshing_from_desktop](assets/images/refresh_error.PNG)|![databricks_error_refreshing_from_desktop](assets/images/databricks_refresh_error.PNG)|
 
-On the other hand, after the report has been uploaded on Power BI Report Server, it requires you to set credentials for each data sources on _Data Sources_ page in _Manage_ area to enable scheduled data refresh. Synapse allows for Windows and Basic authentication however, none of those methods work to establish a successful connection using ESDC email and password. Whereas Databricks does not show up in the list of data sources even if the report is connected to it.
+## Data Refresh in Report Server
+After the report has been uploaded on Power BI Report Server, it requires you to set credentials for each data sources on _Data Sources_ page in _Manage_ area to enable scheduled data refresh. Synapse allows for Windows and Basic authentication however, none of those methods work to establish a successful connection using ESDC email and password. Whereas Databricks does not show up in the list of data sources even if the report is connected to it.
 
-So, currently you can only refresh data from Synapse and Databricks in Power BI Desktop but, not from Power BI Report Server. This is likely because Power BI Report Server can only be accessed from ESDC machine connected to VPN or from the VDI and both have firewall set up. Hence, when attempting to refresh Synapse Analytics in Power BI Report Server we get the following error.
+So, currently PowerBI reports with Synapse and Databricks connection can not be auto-refreshed in Power BI Report Server. This is likely because Power BI Report Server can only be accessed from ESDC machine connected to VPN or from the VDI and both have firewall set up. When attempting to refresh Synapse Analytics in Power BI Report Server we get the following error.
 
 ![error_refreshing_from_server](assets/images/refresh-error-report-server.png)
+
+This has a huge impact on the ability to service basic functions as a reporting suite as data from Synapse Analytics and Databricks Spark Tables cannot be refreshed real-time or on schedule.
 
 ## Debugging Options
 

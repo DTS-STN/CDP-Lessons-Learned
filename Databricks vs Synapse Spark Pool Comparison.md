@@ -38,7 +38,7 @@ To test the performance of Synapse and Databricks Spark, NYC Taxi & Limousine Co
 
 To have same testing conditions for both the technologies, a similar Spark Pool and Databricks cluster were provisioned. Synapse Spark Pool with 3-15 nodes, each node with 64 GB RAM and 8vCores (medium size) with Autoscaling enabled was created. Similarly, a cluster with Databricks Runtime 9.0 (having Spark version 3.1) and 3-15 memory-optimized workers/nodes, each with 64 GB RAM and 8vCores with autoscale enabled was created.
 
-To test the services from Data Scientist's perspective, a linear regression model was built and trained on yellow taxi dataset that predicts the tip amount.
+To test the services from Data Scientist's perspective, a linear regression model was built and trained on yellow taxi dataset that predicts for a given trip whether there will be a tip or not.
 
 First step of testing was reading data for yellow taxi from Jan 2015 to Dec 2020 and loading them in spark dataframe. The dataset consisted of 538,036,933 records.
 
@@ -138,6 +138,9 @@ Below is the summary of the results. The table contains the time (in minutes) it
 |Writing Join 2 results|3.31|3.15|
 |Writing Yellow Taxi Data|1.68|5.28|
 |Writing Green Taxi Data|0.52|1.10|
+
+From this, it can be concluded that reading and joining data takes approximately the same amount of time in both the services. However, data engineering, model training, plotting, and writing large datasets happens faster in Databricks than Synapse, making Databricks an ideal choice for Data Science and Machine Learning workflows.
+
 
 ## References
 [Databricks Notebook](https://adb-374346146549270.10.azuredatabricks.net/?o=374346146549270#notebook/1003328143883228/command/1536406919022445)

@@ -80,15 +80,15 @@ To test join permformance, green taxi dataset was used consisting of 59,464,679 
 
 Reading green taxi dataset took 1.00 minutes in Databricks but, 1 min 10 sec (1.17 minutes) in Synapse.
 
-![g_read]((assets/images/g_read.PNG)
+![g_read](assets/images/g_read.PNG)
 
 The green taxi dataset was tranformed as follows.
 
-![g_tranform_1]((assets/images/g_transform1.PNG)
+![g_tranform_1](assets/images/g_transform1.PNG)
 
 Similarly, yellow taxi dataset was tranformed as follows.
 
-![y_tranform_1]((assets/images/y_transform1.PNG)
+![y_tranform_1](assets/images/y_transform1.PNG)
 
 Then yellow and green taxi datasets were aggregated to take mean, median and sum of totalAmount, tipAmount, fareAmount, passengerCount, tripDistance and joined on hour, day, month and year. The resulting dataframe had 39,408 records.
 

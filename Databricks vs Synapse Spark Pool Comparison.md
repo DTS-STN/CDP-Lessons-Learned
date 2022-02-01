@@ -46,31 +46,33 @@ To test the services from Data Scientist's perspective, a linear regression mode
 
 First step of testing was reading data for yellow taxi from Jan 2015 to Dec 2020 and loading them in spark dataframe. The dataset consisted of 538,036,933 records.
 
-![y_read]()
+![y_read](assets/images/y_read.PNG)
 
 In Databricks this took 2.32 minutes and in Synapse it took 2 min 54 sec that is 2.90 minutes.
 
 Then data transformations and feature engineering (addition of columns, removing outliers) was performed on the data. The categorical (string) variables were converted to numbers using One Hot Encoder. The resulting dataframe consisted of 527,843,708 records.
 
-![featurization]()
+![featurization-part1](assets/images/featurization1.PNG)
+
+![featurization-part2](assets/images/featurization2.PNG)
 
 This process took 3.79 minutes in Databricks and 4 min 57 sec in Synapse that is 4.95 minutes.
 
 Next, training and testing datasets were generated using 70-30 split (70% train set, 30% test set). With this the train and test set had 369,502,368 records and 158,341,340 records respectively.
 
-![dataset_generation]()
+![dataset_generation](assets/images/dataset_generation.PNG)
 
 This took 3.29 minutes in Databricks and 10 min 58 sec (10.97 minutes) in Synapse. That is three times slower than Databricks.
 
 Then Logistic Regression model was trained and evaluated using Area under ROC as the metric.
 
-![logistic_regression]()
+![logistic_regression](assets/images/logistic_regression.PNG)
 
 Model training took 10.29 minutes in Databricks whereas in Synapse it took 39 min 47 sec (39.78 minutes). That is almost four times slower than Databricks.
 
 Plotting the ROC curve took 3.20 minutes in Databricks .
 
-![roc_curve]()
+![roc_curve]((assets/images/roc_curve.PNG)
 
 Doing the same in Synapse took 27 min 42 sec (27.70 minutes). That is more than 8.5 times slower than Databricks.
 
@@ -78,27 +80,29 @@ To test join permformance, green taxi dataset was used consisting of 59,464,679 
 
 Reading green taxi dataset took 1.00 minutes in Databricks but, 1 min 10 sec (1.17 minutes) in Synapse.
 
-![g_read]()
+![g_read]((assets/images/g_read.PNG)
 
 The green taxi dataset was tranformed as follows.
 
-![g_tranform_1]()
+![g_tranform_1]((assets/images/g_transform1.PNG)
 
 Similarly, yellow taxi dataset was tranformed as follows.
 
-![y_tranform_1]()
+![y_tranform_1]((assets/images/y_transform1.PNG)
 
 Then yellow and green taxi datasets were aggregated to take mean, median and sum of totalAmount, tipAmount, fareAmount, passengerCount, tripDistance and joined on hour, day, month and year. The resulting dataframe had 39,408 records.
 
-![join_1]()
+![join_1_transform](assets/images/join1_transform.PNG)
+
+![join_1](assets/images/join1.PNG)
 
 This took 4.94 minutes in Databricks and 4 min 16 sec (4.27 minutes) in Synapse.
 
 Next the datasets were aggregated to take mean, median and sum of totalAmount, tipAmount, fareAmount, passengerCount, tripDistance and joined on pickup and dropoff location (trip path), per hour, day, month, year. The resulting dataframe had 4,023,107 records.
 
-![join_2_transform]()
+![join_2_transform](assets/images/join2_transform.PNG)
 
-![join_2]()
+![join_2](assets/images/join2.PNG)
 
 The join took 5.59 minutes in Databricks and 5 min 28 sec (5.47 minutes) in Synapse.
 

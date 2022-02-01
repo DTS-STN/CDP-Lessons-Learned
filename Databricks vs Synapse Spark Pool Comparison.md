@@ -52,6 +52,8 @@ Then data transformations and feature engineering (addition of columns, removing
 
 ![featurization-part2](assets/images/featurization2.PNG)
 
+![encoding](assets/images/encoding.PNG)
+
 This process took 3.79 minutes in Databricks and 4 min 57 sec in Synapse that is 4.95 minutes.
 
 Next, training and testing datasets were generated using 70-30 split (70% train set, 30% test set). With this the train and test set had 369,502,368 records and 158,341,340 records respectively.
@@ -68,7 +70,7 @@ Model training took 10.29 minutes in Databricks whereas in Synapse it took 39 mi
 
 Plotting the ROC curve took 3.20 minutes in Databricks .
 
-![roc_curve]((assets/images/roc_curve.PNG)
+![roc_curve](assets/images/roc_curve.PNG)
 
 Doing the same in Synapse took 27 min 42 sec (27.70 minutes). That is more than 8.5 times slower than Databricks.
 
@@ -100,9 +102,9 @@ Next the datasets were aggregated to take mean, median and sum of totalAmount, t
 
 ![join_2](assets/images/join2.PNG)
 
-The join took 5.59 minutes in Databricks and 5 min 37 sec (5.62 minutes) in Synapse.
+The join took 5.65 minutes in Databricks and 5 min 37 sec (5.62 minutes) in Synapse.
 
-Lastly, writing second joined dataframe to Azure Data Lake Storage took 4.61 minutes in Databricks whereas writing from Synapse took 3 min 9 sec (3.15 minutes).
+Lastly, writing second joined dataframe to Azure Data Lake Storage took 3.31 minutes in Databricks whereas writing from Synapse took 3 min 9 sec (3.15 minutes).
 
 ![join2_write](assets/images/join2_write.PNG)
 
@@ -119,12 +121,25 @@ Azure Synapse has built-in support for Azure ML to operationalize Machine Learni
 For both services, pricing is based on the number of virtual machines provisioned and their sizing. With Databricks, there is an additional fee for Databricks Units (DBUs). A DBU is a unit of processing capability, billed on a per-second usage. The DBU consumption depends on the size and type of instance running Azure Databricks. 
 See these links for [Databricks](https://azure.microsoft.com/en-ca/pricing/details/databricks/) and [Synapse](https://azure.microsoft.com/en-us/pricing/details/synapse-analytics/) pricing.
 
-For the Databricks cluster used in testing it costs . For Synapse Spark Pool the cost is .
+The Databricks cluster used in testing costs $8.44 - $33.76 per hour for 8 - 32 DBU and VM compute. For Synapse Spark Pool the cost is between $4.13 - $20.63 per hour for 3 - 15 nodes.
+
+## Summary
+Below is the summary of the results. The table contains the time (in minutes) it took to perform each operation.
+|**Operation**|**Databricks Cluster**|**Synapse Spark Pool**|
+|--|--|--|
+|Reading Yellow Taxi Data|2.22|2.90|
+|Featurization and Encoding|3.79|4.95|
+|Splitting Data|3.29|10.97|
+|Model Training|10.29|39.78|
+|Plotting|3.20|27.70|
+|Reading Green Taxi Data|1.00|1.17|
+|Join 1|4.94|4.27|
+|Join 2 (granular)|5.65|5.62|
+|Writing Join 2 results|3.31|3.15|
+|Writing Yellow Taxi Data|1.68|5.28|
+|Writing Green Taxi Data|0.52|1.10|
 
 ## References
-[Databricks Notebook](https://adb-374346146549270.10.azuredatabricks.net/?o=374346146549270#notebook/1003328143883228/command/1003328143883232)
+[Databricks Notebook](https://adb-374346146549270.10.azuredatabricks.net/?o=374346146549270#notebook/1003328143883228/command/1536406919022445)
 
-[Synapse Notebook](https://web.azuresynapse.net/en-us/authoring/explore/workspace/notebooks/Data%20Exploration%20and%20ML%20Modeling%20-%20NYC%20taxi%20predict%20using%20Spark%20MLlib?workspace=%2Fsubscriptions%2F19bddd49-8e73-4699-930d-74baa7e5751e%2FresourceGroups%2FSAEB-AnalyticsPlatform-Dev%2Fproviders%2FMicrosoft.Synapse%2Fworkspaces%2Fsynw-saeb-dev-01&relativePath=authoring%2Fanalyze&sparkPoolName=AspApDev01&livyId=0)
-
-
-
+[Synapse Notebook](https://web.azuresynapse.net/en-us/authoring/analyze/notebooks/Data%20Exploration%20and%20ML%20Modeling%20-%20NYC%20taxi%20predict%20using%20Spark%20MLlib?workspace=%2Fsubscriptions%2F19bddd49-8e73-4699-930d-74baa7e5751e%2FresourceGroups%2FSAEB-AnalyticsPlatform-Dev%2Fproviders%2FMicrosoft.Synapse%2Fworkspaces%2Fsynw-saeb-dev-01&relativePath=authoring%2Fanalyze&sparkPoolName=AspApDev01&livyId=0)

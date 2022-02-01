@@ -22,5 +22,23 @@ To better understand the differences between these two tools in how they leverag
 ## Comparison
 The document below outlines key differences between the two Spark services in Azure Cloud.
 
-### Cluster 
+### Cluster/Spark Pool Setup
+In Synpase Analytics, spark applications run on a Apache Spark Pool. Currently, we can only create pools with Memory Optimized nodes and choose from one of two available Spark versions: _Spark 2.4_ and _Spark 3.1_. There are 6 different node sizes available from Small (4vCores / 32 GB) to XXLarge (64 vCores / 432 GB).
+
+Whereas in Databricks, we run spark applications on a cluster. The three available cluster modes are Single Node, Standard and High Concurrency. There are multiple Databricks Runtime Versions to choose from having different Scala and Spark versions. Additionallly, there is large selection of different worker types.
+
+### Pricing
+For both services, pricing is based on the number of virtual machines provisioned and their sizing. With Databricks, there is an additional fee for Databricks Units (DBUs). A DBU is a unit of processing capability, billed on a per-second usage. The DBU consumption depends on the size and type of instance running Azure Databricks. 
+See these links for [Databricks](https://azure.microsoft.com/en-ca/pricing/details/databricks/) and [Synapse](https://azure.microsoft.com/en-us/pricing/details/synapse-analytics/) pricing.
+
+### Notebook Evironment
+Databricks provides collaborative notebooks with real time co-authoring and automatic versioning. Whereas Synapse requires you to save the changes to your notebook before the other person can see them. There is no automatic versioning in Synapse notebooks.
+
+### Git Integration
+Both services offer GIT integration.
+
+### Performance/Speed
+To test the performance of Synapse and Databricks Spark, NYC Taxi & Limousine Commission's - yellow and green taxi trip datasets were used from Azure ML Open Datasets. To have same test conditions for both the technologies, a similar Spark Pool and Databricks cluster were provisioned. Synapse Spark Pool with 3-15 nodes, each node with 64 GB RAM and 8vCores (medium size) with Autoscaling enabled was created. Similarly, a cluster with Databricks Runtime 9.0 (having Spark version 3.1) and 3-15 memory-optimized workers/nodes, each with 64 GB RAM and 8vCores was created.
+
+
 

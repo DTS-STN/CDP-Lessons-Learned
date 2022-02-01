@@ -27,10 +27,6 @@ In Synpase Analytics, spark applications run on a Apache Spark Pool. Currently, 
 
 Whereas in Databricks, we run spark applications on a cluster. The three available cluster modes are Single Node, Standard and High Concurrency. There are multiple Databricks Runtime Versions to choose from having different Scala and Spark versions. Additionallly, there is large selection of different worker types.
 
-### Pricing
-For both services, pricing is based on the number of virtual machines provisioned and their sizing. With Databricks, there is an additional fee for Databricks Units (DBUs). A DBU is a unit of processing capability, billed on a per-second usage. The DBU consumption depends on the size and type of instance running Azure Databricks. 
-See these links for [Databricks](https://azure.microsoft.com/en-ca/pricing/details/databricks/) and [Synapse](https://azure.microsoft.com/en-us/pricing/details/synapse-analytics/) pricing.
-
 ### Notebook Evironment
 Databricks provides collaborative notebooks with real time co-authoring and automatic versioning. Whereas Synapse requires you to save the changes to your notebook before the other person can see them. There is no automatic versioning in Synapse notebooks.
 
@@ -48,7 +44,7 @@ First step of testing was reading data for yellow taxi from Jan 2015 to Dec 2020
 
 ![y_read](assets/images/y_read.PNG)
 
-In Databricks this took 2.32 minutes and in Synapse it took 2 min 54 sec that is 2.90 minutes.
+In Databricks this took 2.22 minutes and in Synapse it took 2 min 54 sec that is 2.90 minutes.
 
 Then data transformations and feature engineering (addition of columns, removing outliers) was performed on the data. The categorical (string) variables were converted to numbers using One Hot Encoder. The resulting dataframe consisted of 527,843,708 records.
 
@@ -104,17 +100,30 @@ Next the datasets were aggregated to take mean, median and sum of totalAmount, t
 
 ![join_2](assets/images/join2.PNG)
 
-The join took 5.59 minutes in Databricks and 5 min 28 sec (5.47 minutes) in Synapse.
+The join took 5.59 minutes in Databricks and 5 min 37 sec (5.62 minutes) in Synapse.
 
-### test writing to datalake instead of spark database
-Lastly, writing second joined dataframe to spark database took 3.63 minutes in Databricks whereas writing to spark database in Synapse took (minutes) in Synpase.
-Writing yellow taxi and green taxi dataset to spark database took minutes
+Lastly, writing second joined dataframe to Azure Data Lake Storage took 4.61 minutes in Databricks whereas writing from Synapse took 3 min 9 sec (3.15 minutes).
+
+![join2_write](assets/images/join2_write.PNG)
+
+Writing yellow taxi and green taxi dataset to the storage took 1.68 minutes and 31.05 seconds respectively in Databricks. In Synpase, it took 5 min 17 sec (5.28 minutes) to write yellow taxi data and 1 min 6 sec (1.1 minutes) to write green taxi data.
+
+![y_write](assets/images/y_write.PNG)
+
+![g_write](assets/images/g_write.PNG)
 
 ### Machine Learning
 Azure Synapse has built-in support for Azure ML to operationalize Machine Learning Workflows and built-in support for MLflow. However, it does not provide GPU-enabled clusters. Databricks also provides ML optimized Databricks runtimes which include machine leaning libraries like TensorFlow, PyTorch, Keras, etc., GPU enabled clusters and hosted version of MLflow. Databricks can also be integrated with Azure ML.
 
+### Pricing
+For both services, pricing is based on the number of virtual machines provisioned and their sizing. With Databricks, there is an additional fee for Databricks Units (DBUs). A DBU is a unit of processing capability, billed on a per-second usage. The DBU consumption depends on the size and type of instance running Azure Databricks. 
+See these links for [Databricks](https://azure.microsoft.com/en-ca/pricing/details/databricks/) and [Synapse](https://azure.microsoft.com/en-us/pricing/details/synapse-analytics/) pricing.
+
+For the Databricks cluster used in testing it costs . For Synapse Spark Pool the cost is .
+
 ## References
 [Databricks Notebook](https://adb-374346146549270.10.azuredatabricks.net/?o=374346146549270#notebook/1003328143883228/command/1003328143883232)
+
 [Synapse Notebook](https://web.azuresynapse.net/en-us/authoring/explore/workspace/notebooks/Data%20Exploration%20and%20ML%20Modeling%20-%20NYC%20taxi%20predict%20using%20Spark%20MLlib?workspace=%2Fsubscriptions%2F19bddd49-8e73-4699-930d-74baa7e5751e%2FresourceGroups%2FSAEB-AnalyticsPlatform-Dev%2Fproviders%2FMicrosoft.Synapse%2Fworkspaces%2Fsynw-saeb-dev-01&relativePath=authoring%2Fanalyze&sparkPoolName=AspApDev01&livyId=0)
 
 

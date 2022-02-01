@@ -38,7 +38,80 @@ Databricks provides collaborative notebooks with real time co-authoring and auto
 Both services offer GIT integration.
 
 ### Performance/Speed
-To test the performance of Synapse and Databricks Spark, NYC Taxi & Limousine Commission's - yellow and green taxi trip datasets were used from Azure ML Open Datasets. To have same test conditions for both the technologies, a similar Spark Pool and Databricks cluster were provisioned. Synapse Spark Pool with 3-15 nodes, each node with 64 GB RAM and 8vCores (medium size) with Autoscaling enabled was created. Similarly, a cluster with Databricks Runtime 9.0 (having Spark version 3.1) and 3-15 memory-optimized workers/nodes, each with 64 GB RAM and 8vCores was created.
+To test the performance of Synapse and Databricks Spark, NYC Taxi & Limousine Commission's - yellow and green taxi trip datasets were used from Azure ML Open Datasets. All yellow and green taxi trip records, from January 2015 to December 2020 were used for performance testing. 
+
+To have same testing conditions for both the technologies, a similar Spark Pool and Databricks cluster were provisioned. Synapse Spark Pool with 3-15 nodes, each node with 64 GB RAM and 8vCores (medium size) with Autoscaling enabled was created. Similarly, a cluster with Databricks Runtime 9.0 (having Spark version 3.1) and 3-15 memory-optimized workers/nodes, each with 64 GB RAM and 8vCores with autoscale enabled was created.
+
+To test the services from Data Scientist's perspective, a linear regression model was built and trained on yellow taxi dataset that predicts the tip amount.
+
+First step of testing was reading data for yellow taxi from Jan 2015 to Dec 2020 and loading them in spark dataframe. The dataset consisted of 538,036,933 records.
+
+![y_read]()
+
+In Databricks this took 2.32 minutes and in Synapse it took 2 min 54 sec that is 2.90 minutes.
+
+Then data transformations and feature engineering (addition of columns, removing outliers) was performed on the data. The categorical (string) variables were converted to numbers using One Hot Encoder. The resulting dataframe consisted of 527,843,708 records.
+
+![featurization]()
+
+This process took 3.79 minutes in Databricks and 4 min 57 sec in Synapse that is 4.95 minutes.
+
+Next, training and testing datasets were generated using 70-30 split (70% train set, 30% test set). With this the train and test set had 369,502,368 records and 158,341,340 records respectively.
+
+![dataset_generation]()
+
+This took 3.29 minutes in Databricks and 10 min 58 sec (10.97 minutes) in Synapse. That is three times slower than Databricks.
+
+Then Logistic Regression model was trained and evaluated using Area under ROC as the metric.
+
+![logistic_regression]()
+
+Model training took 10.29 minutes in Databricks whereas in Synapse it took 39 min 47 sec (39.78 minutes). That is almost four times slower than Databricks.
+
+Plotting the ROC curve took 3.20 minutes in Databricks .
+
+![roc_curve]()
+
+Doing the same in Synapse took 27 min 42 sec (27.70 minutes). That is more than 8.5 times slower than Databricks.
+
+To test join permformance, green taxi dataset was used consisting of 59,464,679 records. First the data was read and transformed to make it join ready. In this process yellow taxi dataset was also modified and engineered. Total of two joins were performed.
+
+Reading green taxi dataset took 1.00 minutes in Databricks but, 1 min 10 sec (1.17 minutes) in Synapse.
+
+![g_read]()
+
+The green taxi dataset was tranformed as follows.
+
+![g_tranform_1]()
+
+Similarly, yellow taxi dataset was tranformed as follows.
+
+![y_tranform_1]()
+
+Then yellow and green taxi datasets were aggregated to take mean, median and sum of totalAmount, tipAmount, fareAmount, passengerCount, tripDistance and joined on hour, day, month and year. The resulting dataframe had 39,408 records.
+
+![join_1]()
+
+This took 4.94 minutes in Databricks and 4 min 16 sec (4.27 minutes) in Synapse.
+
+Next the datasets were aggregated to take mean, median and sum of totalAmount, tipAmount, fareAmount, passengerCount, tripDistance and joined on pickup and dropoff location (trip path), per hour, day, month, year. The resulting dataframe had 4,023,107 records.
+
+![join_2_transform]()
+
+![join_2]()
+
+The join took 5.59 minutes in Databricks and 5 min 28 sec (5.47 minutes) in Synapse.
+
+### test writing to datalake instead of spark database
+Lastly, writing second joined dataframe to spark database took 3.63 minutes in Databricks whereas writing to spark database in Synapse took (minutes) in Synpase.
+Writing yellow taxi and green taxi dataset to spark database took minutes
+
+### Machine Learning
+Azure Synapse has built-in support for Azure ML to operationalize Machine Learning Workflows and built-in support for MLflow. However, it does not provide GPU-enabled clusters. Databricks also provides ML optimized Databricks runtimes which include machine leaning libraries like TensorFlow, PyTorch, Keras, etc., GPU enabled clusters and hosted version of MLflow. Databricks can also be integrated with Azure ML.
+
+## References
+[Databricks Notebook](https://adb-374346146549270.10.azuredatabricks.net/?o=374346146549270#notebook/1003328143883228/command/1003328143883232)
+[Synapse Notebook](https://web.azuresynapse.net/en-us/authoring/explore/workspace/notebooks/Data%20Exploration%20and%20ML%20Modeling%20-%20NYC%20taxi%20predict%20using%20Spark%20MLlib?workspace=%2Fsubscriptions%2F19bddd49-8e73-4699-930d-74baa7e5751e%2FresourceGroups%2FSAEB-AnalyticsPlatform-Dev%2Fproviders%2FMicrosoft.Synapse%2Fworkspaces%2Fsynw-saeb-dev-01&relativePath=authoring%2Fanalyze&sparkPoolName=AspApDev01&livyId=0)
 
 
 

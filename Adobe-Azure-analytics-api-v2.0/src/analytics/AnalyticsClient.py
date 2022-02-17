@@ -14,6 +14,7 @@ import os
 import requests
 import pandas as pd
 import re
+from azure.storage.blob import BlobClient 
 
 class analytics_client:
 
@@ -333,7 +334,7 @@ class analytics_client:
 
         return df_data
 
-    def get_report_multiple_breakdowns(self):
+    def get_report_multiple_breakdowns(self,dim_names,metric_names):
         '''
         Download report that contains multiple dimensions.
 
@@ -384,7 +385,24 @@ class analytics_client:
 
             df_page = df_page.filter(regex='^itemId|^value', axis = 'columns')
             df_page = pd.merge(df_page, results_broken_down, how = 'right')
-            
+
+        #drop columns starts with itemid
+        df_page = df_page[df_page.columns.drop(list(df_page.filter(regex='itemId_lvl_')))]
+        
+
+        #rename columns starts with value_lvl_ based on parameter dim_names
+        
+        for level in range(len(dim_names)):
+            df_page.rename(columns={'value_lvl_{}'.format(level+1): dim_names[level]}, inplace=True)
+
+        metricName = []
+        for metric in self.report_object['metricContainer']['metrics']:
+            metricName.append(metric['id'])
+
+
+        for level in range(len(self.report_object['metricContainer']['metrics'])):
+            df_page.rename(columns={metricName[level]: metric_names[level]}, inplace=True) 
+               
         return df_page
 
     def get_report_breakdown(self, df_page, dimensions, current_level = None):
@@ -451,6 +469,7 @@ class analytics_client:
         for metric in self.report_object['metricContainer']['metrics']:
             index.append(metric['columnId'])
             metricName.append(metric['id'])
+
         metricNames = pd.DataFrame(index=index, data=metricName)
         # metricNames.columns = ['metrics']
         # Obtain Metrics Name - end

@@ -12,7 +12,7 @@
 # Ingest data from Adobe Analytic using a Databrick Notebook
 
 
-https://github.com/DTS-STN/AP-Databricks/blob/master/notebooks/Nov%2029%20-%20MVP/Ingestion/Adobe%20Analytics/AA%20Ingestion%20Script.py
+[Databricks Notebook - JWT example]https://github.com/DTS-STN/AP-Databricks/blob/master/notebooks/Nov%2029%20-%20MVP/Ingestion/Adobe%20Analytics/AA%20Ingestion%20Script.py
 
 
 

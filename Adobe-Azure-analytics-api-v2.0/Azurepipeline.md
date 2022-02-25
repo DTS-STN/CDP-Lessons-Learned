@@ -1,7 +1,7 @@
 
 | title | description | ms.service|  author  | ms.date |
 | --- | --- | --- | --- | --- 
-|Ingest data by using Databricks in Azure Data Factory |This tutorial provides step-by-step instructions for ingesting data by using a databricks activity in Azure Data Factory |Data-Factory | Juntao Zou| 01/13/2021| 
+|Ingest data by using Databricks in Azure Data Factory |This tutorial provides step-by-step instructions for ingesting data by using a databricks activity in Azure Data Factory |Data-Factory | Juntao Zou| 01/13/2022| 
 
 
 

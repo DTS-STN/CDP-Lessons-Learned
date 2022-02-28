@@ -133,7 +133,8 @@ You author two linked services in this section:
 ![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-open.png)
 
 
-4.View the Databrick Notebook with the following content: [AnalyticsClient - Cloud(Azure) Class](examples/DatabricksNotebook/DatabricksExample.ipynb)
+4.View the Databrick Notebook with the following content: [AnalyticsClient - Cloud(Azure) Class](https://github.com/DTS-STN/AP-Databricks/blob/master/notebooks/Nov%2029%20-%20MVP/Ingestion/Adobe%20Analytics/AA%20Ingestion%20Script.py)
+
 ![](/assets/images/AA-to-Azure-Python-Wrapper-Class/Azure-Databricks-Notebook.png)
 
 

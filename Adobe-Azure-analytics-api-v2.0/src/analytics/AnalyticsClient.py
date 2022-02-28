@@ -1,4 +1,3 @@
-#imports
 import os
 from pytz import timezone
 import webbrowser

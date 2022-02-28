@@ -121,7 +121,7 @@ Perform the authentication
 aa._authenticate()
 ```
 
-For a demo notebook, please refer to the [Jupyter Notebook - OAuth example](examples/JupyterNotebook/OAuthDemo.ipynb)
+
 
 
 

@@ -1,3 +1,5 @@
+# Ingest data from Adobe Analytic using a local Python script
+
 from src.analytics.AnalyticsClient import analytics_client
 from datetime import datetime
 from azure.storage.blob import BlobClient 
